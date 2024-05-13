@@ -7,5 +7,4 @@ fs.writeFile(filePath, strWrite, 'utf8', function (err) {
   if (err) {
     console.error(err);
   }
-  console.log(strWrite);
 });
