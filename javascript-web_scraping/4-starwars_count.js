@@ -1,15 +1,20 @@
 #!/usr/bin/node
 
 const request = require('request');
-const actorID = 18; // 'Star Wars: Episode IV - A New Hope' on top <3
+const U_R_L = process.argv[2];
+const charID = 18;
+let count = 0;
 
-request(`https://swapi-api.hbtn.io/api/people/${actorID}`, (err, response, data) => {
+request(U_R_L, function (err, response, data) {
   if (err) {
     console.error(err);
-    return;
+  } else {
+    const movieData = JSON.parse(data).results;
+    movieData.forEach((movie) => {
+      if (movie.characters.some((character) => character.includes(`/people/${charID}/`))) {
+        count++;
+      }
+    });
+    console.log(count);
   }
-
-  const actorData = JSON.parse(data);
-  const filmCount = actorData.films.length;
-  console.log(filmCount);
 });
