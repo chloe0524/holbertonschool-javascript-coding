@@ -4,7 +4,9 @@ const request = require('request');
 const apiURL = process.argv[2];
 
 request(apiURL, (err, response, body) => {
-  if (err) throw err;
+  if (err) {
+    console.error(err);
+  } 
     const todos = JSON.parse(body);
     const doneTodos = todos.filter(todo => todo.completed);
     const doneTasks = {};
