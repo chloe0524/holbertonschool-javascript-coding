@@ -1,11 +1,9 @@
 #!/usr/bin/node
 
 const fs = require('fs');
-const yargs = require('yargs');
-const argv = yargs.argv;
-const filePath = argv._[0];
+const filePath = process.argv[2];
 
-fs.readFile(filePath, 'utf8', (err, data) => {
+fs.readFile(filePath, 'utf-8', (err, data) => {
   if (err) {
     console.error(err);
   } else {
