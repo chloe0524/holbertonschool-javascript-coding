@@ -3,7 +3,7 @@
 const request = require('request');
 const showId = process.argv[2];
 
-request(`https://swapi.dev/api/films/${showId}/`, function (err, response, data) {
+request(`https://swapi-api.hbtn.io/api/films/${showId}/`, (err, response, data) => {
   if (err) {
     console.error(err);
   }
