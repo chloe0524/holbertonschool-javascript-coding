@@ -1,4 +1,5 @@
-# Node JS Basics :rocket:
+
+![node js basics readme github](https://github.com/chloe0524/holbertonschool-javascript-coding/assets/127857895/1999e62a-19a4-4d40-b9fc-4a676d3f2a16)
 
 ### 0. Executing basic javascript with Node JS :computer:
 
