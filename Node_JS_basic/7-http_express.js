@@ -1,38 +1,43 @@
 /*eslint-disable*/
-const expressus = require('express');
+const express = require('express');
 const fs = require('fs');
 const readline = require('readline');
 
-const applicatio = expressus();
-const porta = 1245;
+const app = express();
+const port = 1245;
 
-applicatio.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-applicatio.get('/students', (req, res) => {
-  const via = process.argv[2];
+app.get('/students', (req, res) => {
+  const path = process.argv[2];
   const rl = readline.createInterface({
-    input: fs.createReadStream(via),
+    input: fs.createReadStream(path),
     output: process.stdout,
     terminal: false,
   });
 
-  let numerusCS = 0; let numerusSWE = 0; const nominibusCS = []; const
-    nominibusSWE = [];
-  rl.on('line', (linea) => {
-    const [nomenPrimum, , , disciplina] = linea.split(',').map((item) => item.trim());
-    if (disciplina === 'CS') { numerusCS++; nominibusCS.push(nomenPrimum); } else if (disciplina === 'SWE') { numerusSWE++; nominibusSWE.push(nomenPrimum); }
+  let countCS = 0; let countSWE = 0; const namesCS = []; const namesSWE = [];
+  rl.on('line', (line) => {
+    const [firstName, , , field] = line.split(',').map((item) => item.trim());
+    if (field === 'CS') { countCS++; namesCS.push(firstName); } 
+    else if (field === 'SWE') { countSWE++; namesSWE.push(firstName); }
   });
 
   rl.on('close', () => {
-    res.send(`This is the list of our students
-      Number of students: ${numerusCS + numerusSWE}
-      Number of students in CS: ${numerusCS}. List: ${nominibusCS.join(', ')}
-      Number of students in SWE: ${numerusSWE}. List: ${nominibusSWE.join(', ')}`);
+    if (countCS + countSWE > 0) {
+      res.send(`This is the list of our students
+        Number of students: ${countCS + countSWE}
+        Number of students in CS: ${countCS}. List: ${namesCS.join(', ')}
+        Number of students in SWE: ${countSWE}. List: ${namesSWE.join(', ')}`);
+    } else {
+      res.send('This is the list of our students\nNumber of students: 0');
+    }
   });
 });
 
-applicatio.listen(porta, () => {
-  console.log(`Server is running on http://localhost:${porta}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
+module.exports = app;
