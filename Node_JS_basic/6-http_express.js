@@ -1,4 +1,6 @@
+/*eslint-disable*/
 const express = require('express');
+
 const expressVpn = express();
 
 expressVpn.get('/', (req, res) => {
